@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dad Jokes</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Dad Jokes</h1>
+      <div id="jokes"></div>
+      <button id="btn">New Joke</button>
+    </div>
+
+    <script>
+      const url = "http://icanhazdadjoke.com";
+
+      const getJoke = () => {
+        fetch(url, {
+          headers: {
+            Accept: "application/json",
+          },
+        })
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            console.log(data.joke);
+            // const p=document.createElement("p");
+            // p.innerText=data.joke;
+            // document.getElementById("jokes").appendChild(p);
+            document.getElementById("jokes").innerText = data.joke;
+          })
+          .catch((error) => {
+            console.log("Its an error");
+          });
+      };
+
+      getJoke();
+      document.getElementById("btn").addEventListener("click", getJoke);
+    </script>
+  </body>
+</html>
